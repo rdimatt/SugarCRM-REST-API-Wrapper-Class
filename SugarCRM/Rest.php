@@ -1,6 +1,6 @@
 <?php
 
-namespace SugarAPI;
+namespace SugarCRM;
 
 /**
  * SugarCRM REST API Class
@@ -12,7 +12,7 @@ namespace SugarAPI;
  * @link	http://github.com/asakusuma/SugarCRM-REST-API-Wrapper-Class/
  */
 
-class SugarRest
+class Rest
 {
     ////////////////////////////////////////
     /// Settings Variables
