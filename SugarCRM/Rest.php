@@ -298,7 +298,6 @@ class Rest
         $call_arguments = array(
             'session' => $this->session,
             'module_name' => $module,
-
         );
 
         if (isset($options['id'])) {
