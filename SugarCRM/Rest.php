@@ -304,6 +304,7 @@ class Rest
             $call_arguments += array(
                 'id' => $options['id'],
                 'select_fields' => $base_fields,
+                'link_name_to_fields_array' => $relationships,
             );
 
             $result = $this->rest_request(
