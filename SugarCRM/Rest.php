@@ -279,6 +279,7 @@ class Rest
         if (!isset($options['where'])) {
             $options['where'] = null;
         }
+
         if (!isset($options['order_by'])) {
             $options['order_by'] = null;
         }
@@ -297,19 +298,37 @@ class Rest
         $call_arguments = array(
             'session' => $this->session,
             'module_name' => $module,
-            'query' => $options['where'],
-            'order_by' => $options['order_by'],
-            'offset' => $options['offset'],
-            'select_fields' => $base_fields,
-            'link_name_to_fields_array' => $relationships,
-            'max_results' => $options['limit'],
-            'deleted' => "FALSE"
+
         );
 
-        $result = $this->rest_request(
-            'get_entry_list',
-            $call_arguments
-        );
+        if (isset($options['id'])) {
+            $call_arguments += array(
+                'id' => $options['id'],
+                'select_fields' => $base_fields,
+            );
+
+            $result = $this->rest_request(
+                'get_entry',
+                   $call_arguments
+            );
+        } else {
+
+            $call_arguments = array_merge($call_arguments, array(
+                'query' => $options['where'],
+                'order_by' => $options['order_by'],
+                'offset' => $options['offset'],
+                'select_fields' => $base_fields,
+                'link_name_to_fields_array' => $relationships,
+                'max_results' => $options['limit'],
+                'deleted' => false
+                )
+            );
+
+            $result = $this->rest_request(
+                'get_entry_list',
+                $call_arguments
+            );
+        }
 
         return $result;
     }
